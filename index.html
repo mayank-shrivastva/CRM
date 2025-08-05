@@ -158,22 +158,25 @@
   </div>
 
   <script>
-    const form = document.getElementById('loginForm');
-    const errorBox = document.getElementById('errorMessage');
+  const form = document.getElementById('loginForm');
+  const errorBox = document.getElementById('errorMessage');
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const username = form.username.value.trim();
-      const password = form.password.value.trim();
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none'; // Hide error on new attempt
 
-      if (username === 'admin' && password === 'admin') {
-        window.location.href = "dashboard.html";
-      } else {
-        errorBox.style.display = 'block';
-      }
-    });
-  </script>
+    const username = form.username.value.trim();
+    const password = form.password.value.trim();
+
+    if (username === 'admin' && password === 'admin') {
+      window.location.href = "/Admin/dashboard.html";
+    } else if (username === 'xyz' && password === 'xyz') {
+      window.location.href = "/dashboard.html";
+    } else {
+      errorBox.style.display = 'block'; // Show error if invalid
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
