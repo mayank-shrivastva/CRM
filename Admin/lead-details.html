@@ -206,48 +206,61 @@
                 </div>
 
                 <!-- Quotations -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Quotations</h3>
-                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Create New Quote</button>
-                    </div>
+              <div class="bg-white rounded-xl shadow-sm p-6">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold text-gray-900">Quotations</h3>
+    <button onclick="createNewQuote()" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+      Create New Quote
+    </button>
+  </div>
 
-                    <div class="space-y-3">
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="font-medium text-gray-900">Quote #Q-2024-001</p>
-                                    <p class="text-sm text-gray-600">CRM Enterprise Package</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-semibold text-gray-900">$42,500</p>
-                                    <span class="status-badge status-qualified">Sent</span>
-                                </div>
-                            </div>
-                            <div class="mt-3 flex gap-2">
-                                <button class="text-sm text-blue-600 hover:text-blue-700">View Details</button>
-                                <button class="text-sm text-green-600 hover:text-green-700">Send Follow-up</button>
-                            </div>
-                        </div>
+  <div class="space-y-3">
+    <!-- Quote #Q-2024-001 -->
+    <div class="border border-gray-200 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-medium text-gray-900">Quote #Q-2024-001</p>
+          <p class="text-sm text-gray-600">CRM Enterprise Package</p>
+        </div>
+        <div class="text-right">
+          <p class="font-semibold text-gray-900">$42,500</p>
+          <span class="status-badge status-qualified">Sent</span>
+        </div>
+      </div>
+      <div class="mt-3 flex gap-2">
+        <button onclick="viewQuoteDetails('Q-2024-001')" class="text-sm text-blue-600 hover:text-blue-700">
+          View Details
+        </button>
+        <button onclick="sendFollowUp('Q-2024-001')" class="text-sm text-green-600 hover:text-green-700">
+          Send Follow-up
+        </button>
+      </div>
+    </div>
 
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="font-medium text-gray-900">Quote #Q-2024-002</p>
-                                    <p class="text-sm text-gray-600">Basic CRM Package</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-semibold text-gray-900">$25,000</p>
-                                    <span class="status-badge status-contacted">Draft</span>
-                                </div>
-                            </div>
-                            <div class="mt-3 flex gap-2">
-                                <button class="text-sm text-blue-600 hover:text-blue-700">Edit</button>
-                                <button class="text-sm text-green-600 hover:text-green-700">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Quote #Q-2024-002 -->
+    <div class="border border-gray-200 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-medium text-gray-900">Quote #Q-2024-002</p>
+          <p class="text-sm text-gray-600">Basic CRM Package</p>
+        </div>
+        <div class="text-right">
+          <p class="font-semibold text-gray-900">$25,000</p>
+          <span class="status-badge status-contacted">Draft</span>
+        </div>
+      </div>
+      <div class="mt-3 flex gap-2">
+        <button onclick="editQuote('Q-2024-002')" class="text-sm text-blue-600 hover:text-blue-700">
+          Edit
+        </button>
+        <button onclick="sendQuote('Q-2024-002')" class="text-sm text-green-600 hover:text-green-700">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
             </div>
 
             <!-- Right Column - Quick Actions & Timeline -->
@@ -433,6 +446,92 @@
       </form>
     `);
         }
+
+        // Create New Quote
+function createNewQuote() {
+    openModal('Create New Quote', `
+      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote Created!'); closeModal();">
+        <div>
+          <label class="block text-sm font-medium">Quote Title</label>
+          <input type="text" class="w-full border-gray-300 rounded mt-1" placeholder="e.g. CRM Premium Plan">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Amount</label>
+          <input type="number" class="w-full border-gray-300 rounded mt-1" placeholder="e.g. 25000">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Description</label>
+          <textarea class="w-full border-gray-300 rounded mt-1" rows="3" placeholder="Package details..."></textarea>
+        </div>
+        <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Create Quote</button>
+      </form>
+    `);
+}
+
+// View Quote Details
+function viewQuoteDetails(quoteId) {
+    openModal('Quote Details', `
+      <div class="space-y-2">
+        <p><strong>Quote ID:</strong> ${quoteId}</p>
+        <p><strong>Title:</strong> CRM Enterprise Package</p>
+        <p><strong>Amount:</strong> $42,500</p>
+        <p><strong>Status:</strong> Sent</p>
+        <p class="text-sm text-gray-600 mt-4">Add more dynamic data here from DB or JSON if needed.</p>
+      </div>
+    `);
+}
+
+// Send Follow-up
+function sendFollowUp(quoteId) {
+    openModal('Send Follow-up', `
+      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Follow-up Sent for ${quoteId}'); closeModal();">
+        <div>
+          <label class="block text-sm font-medium">Message</label>
+          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Write follow-up message..."></textarea>
+        </div>
+        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Send</button>
+      </form>
+    `);
+}
+
+// Edit Quote
+function editQuote(quoteId) {
+    openModal('Edit Quote', `
+      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote ${quoteId} updated!'); closeModal();">
+        <div>
+          <label class="block text-sm font-medium">Title</label>
+          <input type="text" class="w-full border-gray-300 rounded mt-1" value="Basic CRM Package">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Amount</label>
+          <input type="number" class="w-full border-gray-300 rounded mt-1" value="25000">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Description</label>
+          <textarea class="w-full border-gray-300 rounded mt-1" rows="3">Basic features + limited support</textarea>
+        </div>
+        <button type="submit" class="mt-2 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">Update</button>
+      </form>
+    `);
+}
+
+// Send Quote
+function sendQuote(quoteId) {
+    openModal('Send Quote', `
+      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote ${quoteId} sent!'); closeModal();">
+        <div>
+          <label class="block text-sm font-medium">Email</label>
+          <input type="email" class="w-full border-gray-300 rounded mt-1" placeholder="client@example.com">
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Message</label>
+          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Quote details..."></textarea>
+        </div>
+        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Send Quote</button>
+      </form>
+    `);
+}
+
     </script>
 
 
