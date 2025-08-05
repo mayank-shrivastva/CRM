@@ -92,7 +92,7 @@
 
 <body class="bg-white min-h-screen flex flex-col">
   <!-- Header -->
-  <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+ <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
         <div class="flex items-center gap-4">
             <!-- Sidebar toggle (only mobile) -->
             <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -170,73 +170,74 @@
                 <!-- Profile Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                    <ul class="text-sm text-gray-700">
-                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+                  <ul class="text-sm text-gray-700">
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="../index.html">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
 
-    <script>
-        // Toggle Notification
-        const notificationBtn = document.getElementById('notificationBtn');
-        const notificationDropdown = document.getElementById('notificationDropdown');
+  <script>
+    // Toggle Notification
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
 
-        notificationBtn.addEventListener('click', () => {
-            notificationDropdown.classList.toggle('hidden');
-            profileDropdown.classList.add('hidden'); // Hide profile if open
-        });
+    notificationBtn.addEventListener('click', () => {
+      notificationDropdown.classList.toggle('hidden');
+      profileDropdown.classList.add('hidden'); // Hide profile if open
+    });
 
-        // Toggle Profile
-        const profileBtn = document.getElementById('profileBtn');
-        const profileDropdown = document.getElementById('profileDropdown');
+    // Toggle Profile
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
 
-        profileBtn.addEventListener('click', () => {
-            profileDropdown.classList.toggle('hidden');
-            notificationDropdown.classList.add('hidden'); // Hide notification if open
-        });
+    profileBtn.addEventListener('click', () => {
+      profileDropdown.classList.toggle('hidden');
+      notificationDropdown.classList.add('hidden'); // Hide notification if open
+    });
 
-        // Close dropdowns if clicked outside
-        window.addEventListener('click', function (e) {
-            if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
-                notificationDropdown.classList.add('hidden');
-            }
-            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-                profileDropdown.classList.add('hidden');
-            }
-        });
-    </script>
+    // Close dropdowns if clicked outside
+    window.addEventListener('click', function (e) {
+      if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+        notificationDropdown.classList.add('hidden');
+      }
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.add('hidden');
+      }
+    });
+  </script>
 
   <!-- Layout -->
   <main class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
-      <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
+    <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
       <div class="flex items-center gap-3 mb-6">
-       
+
         <span class="text-lg font-semibold">Welcome Admin</span>
       </div>
 
       <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
         <!-- Dashboard -->
         <a href="./dashboard.html"
-          class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
+        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
           </svg>
           Dashboard
         </a>
         <a href="./Add_new.html"
-   class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
-   aria-label="Add New Lead">
-  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-      d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
-  </svg>
-  <span class="text-sm font-medium">Add New Lead</span>
-</a>
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add New Lead">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
+          </svg>
+          <span class="text-sm font-medium">Add New Lead</span>
+        </a>
 
 
         <!-- Lead Management -->
@@ -258,7 +259,7 @@
         </a>
 
         <!-- Follow-Up Alerts -->
-        <a href="./follow-up.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+        <a href="./follow-up.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3c0 .217-.035.428-.098.627L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -310,100 +311,104 @@
     <section class="flex-1 p-6 overflow-y-auto">
       <!-- Header -->
       <div class="mb-6">
-  <h2 class="text-3xl font-bold text-[#111814]">Follow-Up Tracker</h2>
-  <p class="text-[#638872] mt-1 text-base">
-    Monitor upcoming follow-ups, assign team members, and ensure timely communication with leads.
-  </p>
-</div>
+        <h2 class="text-3xl font-bold text-[#111814]">Follow-Up Tracker</h2>
+        <p class="text-[#638872] mt-1 text-base">
+          Monitor upcoming follow-ups, assign team members, and ensure timely communication with leads.
+        </p>
+      </div>
 
 
       <!-- Stats Cards -->
-    
+
 
       <!-- Leads Table -->
 
       <div class="mt-10">
-  
 
-  <!-- Mobile Card View -->
-  <div class="md:hidden space-y-4">
-    <div class="border border-[#dce5e0] rounded-xl p-4 shadow-sm">
-      <p class="text-sm font-semibold text-[#111814]">Caller:</p>
-      <p class="mb-2 text-[#111814] font-medium">John Smith</p>
 
-      <p class="text-sm font-semibold text-[#111814]">Phone:</p>
-      <p class="mb-2 text-[#638872]">+1 (555) 123-4567</p>
+        <!-- Mobile Card View -->
+        <div class="md:hidden space-y-4">
+          <div class="border border-[#dce5e0] rounded-xl p-4 shadow-sm">
+            <p class="text-sm font-semibold text-[#111814]">Caller:</p>
+            <p class="mb-2 text-[#111814] font-medium">John Smith</p>
 
-      <p class="text-sm font-semibold text-[#111814]">Call Type:</p>
-      <p class="mb-2 text-[#638872]">Outgoing</p>
+            <p class="text-sm font-semibold text-[#111814]">Phone:</p>
+            <p class="mb-2 text-[#638872]">+1 (555) 123-4567</p>
 
-      <p class="text-sm font-semibold text-[#111814]">Follow-Up Status:</p>
-      <span class="inline-block mb-2 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">Pending</span>
+            <p class="text-sm font-semibold text-[#111814]">Call Type:</p>
+            <p class="mb-2 text-[#638872]">Outgoing</p>
 
-      <p class="text-sm font-semibold text-[#111814]">Next Follow-Up Date:</p>
-      <p class="mb-2 text-[#111814]">2025-08-07</p>
+            <p class="text-sm font-semibold text-[#111814]">Follow-Up Status:</p>
+            <span
+              class="inline-block mb-2 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">Pending</span>
 
-      <p class="text-sm font-semibold text-[#111814]">Last Call Duration:</p>
-      <p class="mb-2 text-[#111814]">03:24</p>
+            <p class="text-sm font-semibold text-[#111814]">Next Follow-Up Date:</p>
+            <p class="mb-2 text-[#111814]">2025-08-07</p>
 
-      <p class="text-sm font-semibold text-[#111814]">Last Call Date:</p>
-      <p class="mb-3 text-[#111814]">2025-08-03</p>
-        <div class="mt-3">
-        <a href="/john-smith.html" target="_blank" class="bg-[#111814] text-white text-sm px-4 py-2 rounded hover:bg-[#1e2b24] transition">
-          View Details
-        </a>
+            <p class="text-sm font-semibold text-[#111814]">Last Call Duration:</p>
+            <p class="mb-2 text-[#111814]">03:24</p>
+
+            <p class="text-sm font-semibold text-[#111814]">Last Call Date:</p>
+            <p class="mb-3 text-[#111814]">2025-08-03</p>
+            <div class="mt-3">
+              <a href="/john-smith.html" target="_blank"
+                class="bg-[#111814] text-white text-sm px-4 py-2 rounded hover:bg-[#1e2b24] transition">
+                View Details
+              </a>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="hidden md:block overflow-x-auto rounded-xl border border-[#dce5e0] mt-4">
+          <table class="w-full text-left text-sm min-w-[800px]">
+            <thead class="bg-[#f0f4f2] text-[#111814]">
+              <tr>
+                <th class="p-3 font-medium">Caller</th>
+                <th class="p-3 font-medium">Phone</th>
+                <th class="p-3 font-medium">Call Type</th>
+                <th class="p-3 font-medium">Follow-Up Status</th>
+                <th class="p-3 font-medium">Next Follow-Up</th>
+                <th class="p-3 font-medium">Last Duration</th>
+                <th class="p-3 font-medium">Last Call Date</th>
+                <th class="p-3 font-medium">Actions</th>
+
+              </tr>
+            </thead>
+            <tbody class="text-[#638872]">
+              <tr class="border-t border-[#dce5e0]">
+                <td class="p-3 font-medium text-[#111814]">John Smith</td>
+                <td class="p-3">+1 (555) 123-4567</td>
+                <td class="p-3">Outgoing</td>
+                <td class="p-3">
+                  <span
+                    class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">Pending</span>
+                </td>
+                <td class="p-3">2025-08-07</td>
+                <td class="p-3">03:24</td>
+                <td class="p-3">2025-08-03</td>
+                <td class="p-3">
+                  <a href="lead-details.html" target="_blank"
+                    class="bg-[#111814] text-white text-xs px-3 py-1 rounded hover:bg-[#1e2b24] transition">
+                    View
+                  </a>
+                </td>
+
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-
-
-     
-    </div>
-  </div>
-
-  <!-- Desktop Table View -->
-  <div class="hidden md:block overflow-x-auto rounded-xl border border-[#dce5e0] mt-4">
-    <table class="w-full text-left text-sm min-w-[800px]">
-      <thead class="bg-[#f0f4f2] text-[#111814]">
-        <tr>
-          <th class="p-3 font-medium">Caller</th>
-          <th class="p-3 font-medium">Phone</th>
-          <th class="p-3 font-medium">Call Type</th>
-          <th class="p-3 font-medium">Follow-Up Status</th>
-          <th class="p-3 font-medium">Next Follow-Up</th>
-          <th class="p-3 font-medium">Last Duration</th>
-          <th class="p-3 font-medium">Last Call Date</th>
-          <th class="p-3 font-medium">Actions</th>
-          
-        </tr>
-      </thead>
-      <tbody class="text-[#638872]">
-        <tr class="border-t border-[#dce5e0]">
-          <td class="p-3 font-medium text-[#111814]">John Smith</td>
-          <td class="p-3">+1 (555) 123-4567</td>
-          <td class="p-3">Outgoing</td>
-          <td class="p-3">
-            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">Pending</span>
-          </td>
-          <td class="p-3">2025-08-07</td>
-          <td class="p-3">03:24</td>
-          <td class="p-3">2025-08-03</td>
-           <td class="p-3">
-            <a href="lead-details.html" target="_blank" class="bg-[#111814] text-white text-xs px-3 py-1 rounded hover:bg-[#1e2b24] transition">
-              View
-            </a>
-          </td>
-          
-         
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
 
 
       <!-- Pagination -->
 
-    
+
 
 
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create & Edit Quotation - CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .editable:hover { background-color: #f3f4f6; cursor: pointer; }
+        .editing { border: 2px solid #0d9488; background-color: #f0fdfa; }
+        .preview-section { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="send-a-quotes.html" class="text-gray-500 hover:text-gray-700 mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </a>
+                    <h1 class="text-2xl font-bold text-gray-900">Create Quotation</h1>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button id="saveDraftBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                        Save Draft
+                    </button>
+                    <button id="previewBtn" class="px-4 py-2 text-sm font-medium text-white bg-teal-600 rounded-md hover:bg-teal-700">
+                        Preview
+                    </button>
+                    <button id="sendQuoteBtn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700">
+                        Send Quotation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Form Section -->
+            <div class="lg:col-span-2">
+                <form id="quotationForm" class="space-y-6">
+                    <!-- Client Information -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Client Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
+                                <input type="text" id="clientName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Enter client name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="clientEmail" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="client@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                <input type="tel" id="clientPhone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                                <input type="text" id="clientCompany" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Company name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Details -->
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-4">Service Details</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Service Description</label>
+                                <textarea id="serviceDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Describe the service being provided"></textarea>
+                            </div>
+                            
+                            <!-- Dynamic Items -->
+                            <div id="serviceItems">
+                                <div class="service-item border border-gray-200 rounded-lg p-4 mb-3">
+                                    <div class="grid grid-cols-12 gap-3 items-center">
+                                        <div class="col-span-5">
+                                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Item description">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md quantity" placeholder="Qty" min="1">
+                                        </div>
+                                        <div class="col-span-3">
+                                            <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-md price" placeholder="Price" min="0" step="0.01">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <input type="number" classI have reviewed the existing send-a-quotes.html page. It is a dashboard page that lists quotation requests with a "Send" button linking to quote.html (which currently does not exist). The page uses Tailwind CSS for styling and has a sidebar and header.
+
+The task is to create a new quote.html page where the user can fill in quotation data and edit the quotation before sending.
+
+Plan:
+- Create a new quote.html page.
+- The page will have a form to fill in quotation details such as client name, phone, service, quotation amount, and any additional notes.
+- The form fields should be editable so the user can modify the quotation before sending.
+- Include buttons for "Send" and "Cancel".
+- Use similar styling (Tailwind CSS) and layout consistent with send-a-quotes.html.
+- Optionally, add basic client-side validation.
+- The "Send" button can be a placeholder for now (e.g., alert or console log) since no backend is specified.
+
+Dependent files:
+- None, this is a standalone new page.
+
+Follow-up steps:
+- Create the quote.html file with the described form and layout.
+- After creation, you can review and test the page.
+
+Please confirm if I can proceed with this plan to create the quote.html page. If you want any specific fields or features included, please let me know.
+
+<ask_followup_question>
+<question>Can I proceed with creating the quote.html page as described? Any specific fields or features you want included?</question>
+</ask_followup_question>

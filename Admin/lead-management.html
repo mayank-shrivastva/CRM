@@ -92,92 +92,93 @@
 
 <body class="bg-white min-h-screen flex flex-col">
   <!-- Header -->
-  <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
-    <div class="flex items-center gap-4">
-      <!-- Sidebar toggle (only mobile) -->
-      <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      <h1 class="text-xl font-bold text-gray-900">CRM</h1>
-    </div>
-
-    <div class="flex items-center gap-4 relative">
-      <!-- Notifications Button -->
-      <div class="relative">
-        <button id="notificationBtn" class="p-2 rounded-full hover:bg-gray-100" title="Notifications">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-        </button>
-
-        <!-- Notifications Dropdown -->
-        <!-- Notifications Dropdown -->
-        <div id="notificationDropdown"
-          class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
-          <div class="px-4 py-3 border-b text-sm font-semibold text-gray-800">
-            Notifications
-          </div>
-          <ul class="divide-y divide-gray-100 max-h-72 overflow-y-auto">
-            <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
-              <span class="text-yellow-500 text-lg">🔔</span>
-              <div class="text-sm text-gray-700 leading-tight">
-                <p class="font-medium">New task assigned</p>
-                <p class="text-xs text-gray-400 mt-1">Just now</p>
-              </div>
-            </li>
-            <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
-              <span class="text-indigo-500 text-lg">📅</span>
-              <div class="text-sm text-gray-700 leading-tight">
-                <p class="font-medium">Meeting at 3PM</p>
-                <p class="text-xs text-gray-400 mt-1">Today</p>
-              </div>
-            </li>
-            <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
-              <span class="text-green-500 text-lg">✅</span>
-              <div class="text-sm text-gray-700 leading-tight">
-                <p class="font-medium">Task "Lead Follow-up" marked complete</p>
-                <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
-              </div>
-            </li>
-          </ul>
+ <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+        <div class="flex items-center gap-4">
+            <!-- Sidebar toggle (only mobile) -->
+            <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <h1 class="text-xl font-bold text-gray-900">CRM</h1>
         </div>
 
-      </div>
+        <div class="flex items-center gap-4 relative">
+            <!-- Notifications Button -->
+            <div class="relative">
+                <button id="notificationBtn" class="p-2 rounded-full hover:bg-gray-100" title="Notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </button>
 
-      <!-- Settings Button -->
-      <button class="p-2 rounded-full hover:bg-gray-100" title="Settings">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
-        </svg>
-      </button>
+                <!-- Notifications Dropdown -->
+                <!-- Notifications Dropdown -->
+                <div id="notificationDropdown"
+                    class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
+                    <div class="px-4 py-3 border-b text-sm font-semibold text-gray-800">
+                        Notifications
+                    </div>
+                    <ul class="divide-y divide-gray-100 max-h-72 overflow-y-auto">
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-yellow-500 text-lg">🔔</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">New task assigned</p>
+                                <p class="text-xs text-gray-400 mt-1">Just now</p>
+                            </div>
+                        </li>
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-indigo-500 text-lg">📅</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">Meeting at 3PM</p>
+                                <p class="text-xs text-gray-400 mt-1">Today</p>
+                            </div>
+                        </li>
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-green-500 text-lg">✅</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">Task "Lead Follow-up" marked complete</p>
+                                <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-      <!-- Profile Button -->
-      <div class="relative">
-        <button id="profileBtn" class="focus:outline-none">
-          <img src="https://avatar.iran.liara.run/public" alt="User Avatar"
-            class="w-10 h-10 rounded-full border border-gray-300">
-        </button>
+            </div>
 
-        <!-- Profile Dropdown -->
-        <div id="profileDropdown"
-          class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-          <ul class="text-sm text-gray-700">
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-            <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
-          </ul>
+            <!-- Settings Button -->
+            <button class="p-2 rounded-full hover:bg-gray-100" title="Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                </svg>
+            </button>
+
+            <!-- Profile Button -->
+            <div class="relative">
+                <button id="profileBtn" class="focus:outline-none">
+                    <img src="https://avatar.iran.liara.run/public" alt="User Avatar"
+                        class="w-10 h-10 rounded-full border border-gray-300">
+                </button>
+
+                <!-- Profile Dropdown -->
+                <div id="profileDropdown"
+                    class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                  <ul class="text-sm text-gray-700">
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
   <script>
     // Toggle Notification
@@ -221,7 +222,7 @@
       <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
         <!-- Dashboard -->
         <a href="./dashboard.html"
-          class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
+        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
           </svg>
@@ -240,7 +241,7 @@
 
         <!-- Lead Management -->
         <a href="./lead-management.html"
-          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+           class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
