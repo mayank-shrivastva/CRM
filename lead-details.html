@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Smith - Lead Details</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans', sans-serif;
+    }
+    
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .status-new { background-color: #dbeafe; color: #1e40af; }
+    .status-contacted { background-color: #fef3c7; color: #92400e; }
+    .status-qualified { background-color: #d1fae5; color: #065f46; }
+    .status-converted { background-color: #d1fae5; color: #065f46; }
+    .status-lost { background-color: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white px-6 py-4 shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="lead-management.html" class="text-gray-600 hover:text-gray-900">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </a>
+        <h1 class="text-2xl font-bold text-gray-900">Lead Details</h1>
+      </div>
+      
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Lead Header -->
+   <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+    <!-- Left: Avatar + Info -->
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <img src="https://avatar.iran.liara.run/public/40" alt="John Smith" class="w-16 h-16 rounded-full mx-auto sm:mx-0">
+      <div class="text-center sm:text-left">
+        <h2 class="text-xl font-bold text-gray-900">John Smith</h2>
+        <p class="text-gray-600">Lead ID: #LS-2024-001</p>
+        <span class="inline-block px-3 py-1 mt-2 text-sm bg-green-100 text-green-700 rounded-full">Qualified</span>
+      </div>
+    </div>
+
+    <!-- Right: Dates -->
+    <div class="text-center sm:text-right">
+      <p class="text-sm text-gray-500">Created</p>
+      <p class="font-semibold">March 15, 2024</p>
+      <p class="text-sm text-gray-500 mt-1">Last Updated: 2 hours ago</p>
+    </div>
+  </div>
+</div>
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left Column - Contact Info -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Contact Information -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <p class="text-gray-900">john.smith@example.com</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <p class="text-gray-900">+1 (555) 123-4567</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+              <p class="text-gray-900">Tech Solutions Inc.</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+              <p class="text-gray-900">IT Director</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+              <p class="text-gray-900">123 Business Ave, Suite 100<br>New York, NY 10001</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Source</label>
+              <p class="text-gray-900">Website Contact Form</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lead Details -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Lead Details</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Lead Score</label>
+              <p class="text-gray-900 font-semibold">85/100</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+              <p class="text-gray-900">Technology</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Company Size</label>
+              <p class="text-gray-900">50-200 employees</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Annual Revenue</label>
+              <p class="text-gray-900">$5M - $10M</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Budget</label>
+              <p class="text-gray-900">$25,000 - $50,000</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Decision Timeline</label>
+              <p class="text-gray-900">Next 30 days</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calling Information -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Calling Information</h3>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Log Call</button>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="border-l-4 border-blue-500 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Phone Call - Outbound</p>
+                <span class="text-sm text-gray-500">Today, 2:30 PM</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Discussed requirements for CRM implementation. Client interested in custom dashboard features.</p>
+              <p class="text-xs text-gray-500 mt-1">Duration: 25 minutes | Status: Interested</p>
+            </div>
+
+            <div class="border-l-4 border-green-500 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Phone Call - Inbound</p>
+                <span class="text-sm text-gray-500">Mar 18, 10:15 AM</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Follow-up call regarding pricing and implementation timeline</p>
+              <p class="text-xs text-gray-500 mt-1">Duration: 15 minutes | Status: Requested Quote</p>
+            </div>
+
+            <div class="border-l-4 border-gray-400 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Phone Call - Outbound</p>
+                <span class="text-sm text-gray-500">Mar 16, 3:45 PM</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Initial contact call - left voicemail</p>
+              <p class="text-xs text-gray-500 mt-1">Duration: 2 minutes | Status: Voicemail</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Updates & Notes -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Updates & Notes</h3>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Add Note</button>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="border-l-4 border-purple-500 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Status Updated</p>
+                <span class="text-sm text-gray-500">2 hours ago</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Lead status changed from "Contacted" to "Qualified"</p>
+              <p class="text-xs text-gray-500 mt-1">Updated by: Sarah Johnson</p>
+            </div>
+
+            <div class="border-l-4 border-blue-500 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Note Added</p>
+                <span class="text-sm text-gray-500">Yesterday</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Client mentioned they are evaluating 3 other vendors. Need to schedule demo ASAP.</p>
+              <p class="text-xs text-gray-500 mt-1">Added by: Mike Davis</p>
+            </div>
+
+            <div class="border-l-4 border-green-500 pl-4">
+              <div class="flex items-center justify-between">
+                <p class="font-medium text-gray-900">Email Sent</p>
+                <span class="text-sm text-gray-500">Mar 19</span>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">Sent follow-up email with case studies and ROI calculator</p>
+              <p class="text-xs text-gray-500 mt-1">Sent by: System</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quotations -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Quotations</h3>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Create New Quote</button>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="border border-gray-200 rounded-lg p-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-gray-900">Quote #Q-2024-001</p>
+                  <p class="text-sm text-gray-600">CRM Enterprise Package</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-semibold text-gray-900">$42,500</p>
+                  <span class="status-badge status-qualified">Sent</span>
+                </div>
+              </div>
+              <div class="mt-3 flex gap-2">
+                <button class="text-sm text-blue-600 hover:text-blue-700">View Details</button>
+                <button class="text-sm text-green-600 hover:text-green-700">Send Follow-up</button>
+              </div>
+            </div>
+
+            <div class="border border-gray-200 rounded-lg p-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium text-gray-900">Quote #Q-2024-002</p>
+                  <p class="text-sm text-gray-600">Basic CRM Package</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-semibold text-gray-900">$25,000</p>
+                  <span class="status-badge status-contacted">Draft</span>
+                </div>
+              </div>
+              <div class="mt-3 flex gap-2">
+                <button class="text-sm text-blue-600 hover:text-blue-700">Edit</button>
+                <button class="text-sm text-green-600 hover:text-green-700">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Quick Actions & Timeline -->
+      <div class="space-y-6">
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+          <div class="space-y-3">
+            <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+              Schedule Call
+            </button>
+            <button class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+              Send Email
+            </button>
+            <button class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+              Schedule Meeting
+            </button>
+            <button class="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
+              Add Note
+            </button>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Activity Timeline</h3>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Call Scheduled</p>
+                <p class="text-xs text-gray-500">Today, 3:00 PM</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Quote Sent</p>
+                <p class="text-xs text-gray-500">Yesterday</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Lead Qualified</p>
+                <p class="text-xs text-gray-500">2 days ago</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Lead Created</p>
+                <p class="text-xs text-gray-500">Mar 15, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assigned Team -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Assigned Team</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <img src="https://avatar.iran.liara.run/public/1" alt="Sarah Johnson" class="w-8 h-8 rounded-full">
+              <div>
+                <p class="text-sm font-medium text-gray-900">Sarah Johnson</p>
+                <p class="text-xs text-gray-500">Sales Rep</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <img src="https://avatar.iran.liara.run/public/2" alt="Mike Davis" class="w-8 h-8 rounded-full">
+              <div>
+                <p class="text-sm font-medium text-gray-900">Mike Davis</p>
+                <p class="text-xs text-gray-500">Account Manager</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-12">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <p class="text-center text-sm text-gray-500"><!--© 2024 LeadFlow CRM. All rights reserved.--></p>
+    </div>
+  </footer>
+</body>
+
+</html>

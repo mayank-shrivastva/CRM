@@ -1,0 +1,55 @@
+<style>
+  /* Mobile First Approach */
+
+  /* Adjust table padding and font size for smaller devices */
+  @media (max-width: 640px) {
+    table th, table td {
+      padding: 0.5rem !important;
+      font-size: 0.75rem;
+    }
+
+    input[type="text"], select {
+      width: 100% !important;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .filter-buttons {
+      flex-direction: column !important;
+      gap: 0.5rem !important;
+    }
+
+    #sidebar {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      z-index: 50;
+      height: 100%;
+      transition: left 0.3s ease-in-out;
+    }
+
+    #sidebar.active {
+      left: 0;
+    }
+
+    #sidebarToggle {
+      display: inline-block;
+    }
+  }
+
+  /* Medium devices (tablets, 641px - 768px) */
+  @media (min-width: 641px) and (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  /* Large devices (desktop) */
+  @media (min-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+</style>
