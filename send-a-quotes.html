@@ -150,15 +150,18 @@
             </div>
 
             <!-- Settings Button -->
-            <button class="p-2 rounded-full hover:bg-gray-100" title="Settings">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                </svg>
-            </button>
+           <a href="setting.html" title="Settings">
+  <button class="p-2 rounded-full hover:bg-gray-100">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+    </svg>
+  </button>
+</a>
+
 
             <!-- Profile Button -->
             <div class="relative">
@@ -170,7 +173,7 @@
                 <!-- Profile Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <ul class="text-sm text-gray-700">
+                    <ul class="text-sm text-gray-700">
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="index.html">Logout</a></li>
@@ -283,10 +286,23 @@
     <!-- Main Content -->
     <section class="flex-1 p-6 overflow-y-auto">
       <!-- Header -->
-    <div class="mb-6">
-  <h2 class="text-2xl font-semibold text-[#111814]">Send a Quote</h2>
-  <p class="text-sm text-[#638872] mt-1">Create and share personalized quotes with leads and customers efficiently.</p>
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+  <!-- Left Side (Heading + Subheading) -->
+  <div>
+    <h2 class="text-2xl font-semibold text-[#111814]">Send a Quote</h2>
+    <p class="text-sm text-[#638872] mt-1">
+      Create and share personalized quotes with leads and customers efficiently.
+    </p>
+  </div>
+
+  <!-- Right Side (Button) -->
+  <div>
+    <button class="bg-[#111814] text-white px-5 py-2 rounded-md hover:bg-[#2a3b2f] transition w-fit">
+      Send Today Work
+    </button>
+  </div>
 </div>
+
 
 
 

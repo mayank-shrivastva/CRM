@@ -2,97 +2,105 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lead Management Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <style>
-    body {
-      font-family: 'Inter', 'Noto Sans', sans-serif;
-    }
-  </style>
-  <style>
-    /* Mobile First Approach */
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Management Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans', sans-serif;
+        }
+    </style>
+    <style>
+        /* Mobile First Approach */
 
-    /* Adjust table padding and font size for smaller devices */
-    @media (max-width: 640px) {
+        /* Adjust table padding and font size for smaller devices */
+        @media (max-width: 640px) {
 
-      table th,
-      table td {
-        padding: 0.5rem !important;
-        font-size: 0.75rem;
-      }
+            table th,
+            table td {
+                padding: 0.5rem !important;
+                font-size: 0.75rem;
+            }
 
-      input[type="text"],
-      select {
-        width: 100% !important;
-      }
+            input[type="text"],
+            select {
+                width: 100% !important;
+            }
 
-      .stats-grid {
-        grid-template-columns: 1fr !important;
-      }
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
 
-      .filter-buttons {
-        flex-direction: column !important;
-        gap: 0.5rem !important;
-      }
+            .filter-buttons {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
 
-      #sidebar {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        z-index: 50;
-        height: 100%;
-        transition: left 0.3s ease-in-out;
-      }
+            #sidebar {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                z-index: 50;
+                height: 100%;
+                transition: left 0.3s ease-in-out;
+            }
 
-      #sidebar.active {
-        left: 0;
-      }
+            #sidebar.active {
+                left: 0;
+            }
 
-      #sidebarToggle {
-        display: inline-block;
-      }
-    }
+            #sidebarToggle {
+                display: inline-block;
+            }
+        }
 
-    /* Medium devices (tablets, 641px - 768px) */
-    @media (min-width: 641px) and (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
+        /* Medium devices (tablets, 641px - 768px) */
+        @media (min-width: 641px) and (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
 
-    /* Large devices (desktop) */
-    @media (min-width: 1024px) {
-      .stats-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
-      }
-    }
-  </style>
+        /* Large devices (desktop) */
+        @media (min-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+    </style>
 
-  <script src="./sidebar-dropdown.js" defer></script>
-  <script>
-    // sidebar-dropdown.js
-    document.addEventListener('DOMContentLoaded', () => {
-      const sidebarToggle = document.getElementById('sidebarToggle');
-      const sidebar = document.getElementById('sidebar');
+    
+   <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
 
+    if (sidebarToggle) {
       sidebarToggle.addEventListener('click', () => {
         sidebar.classList.toggle('active');
       });
-    });
+    }
+  });
 
-  </script>
+  function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('active');
+    }
+  }
+</script>
+
 </head>
 
 <body class="bg-white min-h-screen flex flex-col">
-  <!-- Header -->
-  <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+    <!-- Header -->
+    <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
         <div class="flex items-center gap-4">
             <!-- Sidebar toggle (only mobile) -->
             <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -170,7 +178,7 @@
                 <!-- Profile Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <ul class="text-sm text-gray-700">
+                    <ul class="text-sm text-gray-700">
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="../index.html">Logout</a></li>
@@ -210,35 +218,59 @@
         });
     </script>
 
-  <!-- Layout -->
-  <main class="flex flex-1 overflow-hidden">
-    <!-- Sidebar -->
-      <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
-      <div class="flex items-center gap-3 mb-6">
+    <!-- Layout -->
+    <main class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
+            <div class="flex items-center gap-3 mb-6">
+                 <button onclick="closeSidebar()" class="absolute top-4 right-4 md:hidden text-gray-500 hover:text-red-600">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+      </svg>
+    </button>
        
         <span class="text-lg font-semibold">Welcome Admin</span>
       </div>
 
       <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
         <!-- Dashboard -->
-        <a href="./dashboard.html"
-        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
-          
+         <a href="./dashboard.html"
+         class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add/Edit Employee">
+          <!-- Home Icon -->
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0h4" />
           </svg>
           Dashboard
         </a>
-        <a href="./Add_new.html"
-   class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
-   aria-label="Add New Lead">
-  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-      d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
-  </svg>
-  <span class="text-sm font-medium">Add New Lead</span>
-</a>
 
+        <!-- Add New Lead -->
+        <a href="./Add_new.html"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add New Lead">
+          <!-- User Plus Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M18 9a3 3 0 11-6 0 3 3 0 016 0zM13 15h-1a4 4 0 00-4 4v1m6-5h6m-3-3v6" />
+          </svg>
+          <span class="text-sm font-medium">Add New Lead</span>
+        </a>
+
+        <!-- Add/Edit Employee -->
+        <a href="./Add_new_employee.html"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add/Edit Employee">
+          <!-- Briefcase Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6M12 4V2m0 0H9a2 2 0 00-2 2v2h10V4a2 2 0 00-2-2h-3zM4 7h16v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" />
+          </svg>
+          <span class="text-sm font-medium">Add/Edit Employee</span>
+        </a>
 
         <!-- Lead Management -->
         <a href="./lead-management.html"
@@ -307,151 +339,168 @@
 
 
     <!-- Main Content -->
-    <section class="flex-1 p-6 overflow-y-auto">
-      <div class="mb-6">
-        <h2 class="text-3xl font-bold text-[#111814]">User Profile</h2>
-        <p class="text-[#638872] mt-1">Manage your profile information and settings.</p>
+  <!-- Include Alpine.js for tab functionality -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<section class="flex-1 p-6 overflow-y-auto" x-data="{ tab: 'profile' }">
+  <div class="mb-6">
+    <h2 class="text-3xl font-bold text-[#111814]">User Profile</h2>
+    <p class="text-[#638872] mt-1">Manage your profile information and settings.</p>
+  </div>
+
+  <!-- Tab Buttons -->
+  <div class="flex space-x-4 border-b border-[#dce5e0] mb-6">
+    <button @click="tab = 'profile'" :class="tab === 'profile' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Profile Info</button>
+    <button @click="tab = 'settings'" :class="tab === 'settings' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Settings</button>
+    <button @click="tab = 'password'" :class="tab === 'password' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Change Password</button>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Profile Sidebar (always visible) -->
+    <div class="lg:col-span-1">
+      <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+        <div class="flex flex-col items-center">
+          <img src="https://avatar.iran.liara.run/public" alt="User Avatar" class="w-24 h-24 rounded-full border-4 border-[#19e56e]" />
+          <h3 class="text-xl font-bold mt-4 text-[#111814]">John Doe</h3>
+          <p class="text-[#638872]">Sales Manager</p>
+          <p class="text-sm text-[#638872] mt-2">Member since Jan 2023</p>
+          <button class="mt-4 bg-[#19e56e] text-white font-bold px-4 py-2 rounded-lg">Change Photo</button>
+        </div>
       </div>
 
-      <!-- Profile Section -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Profile Info -->
-        <div class="lg:col-span-1">
-          <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
-            <div class="flex flex-col items-center">
-              <img src="https://avatar.iran.liara.run/public%22" alt="User Avatar" class="w-24 h-24 rounded-full border-4 border-[#19e56e]" />
-              <h3 class="text-xl font-bold mt-4 text-[#111814]">John Doe</h3>
-              <p class="text-[#638872]">Sales Manager</p>
-              <p class="text-sm text-[#638872] mt-2">Member since Jan 2023</p>
-              <button class="mt-4 bg-[#19e56e] text-white font-bold px-4 py-2 rounded-lg">Change Photo</button>
+      <div class="grid grid-cols-2 gap-4 mt-6">
+        <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
+          <p class="text-2xl font-bold text-[#111814]">142</p>
+          <p class="text-sm text-[#638872]">Leads</p>
+        </div>
+        <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
+          <p class="text-2xl font-bold text-[#111814]">86</p>
+          <p class="text-sm text-[#638872]">Conversions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Content Tabs -->
+    <div class="lg:col-span-2">
+      <!-- Profile Info Tab -->
+      <div x-show="tab === 'profile'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Profile Information</h3>
+          <form>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">First Name</label>
+                <input type="text" value="John" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Last Name</label>
+                <input type="text" value="Doe" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Email</label>
+                <input type="email" value="john.doe@example.com" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Phone</label>
+                <input type="tel" value="+1 (555) 123-4567" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Department</label>
+                <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
+                  <option>Sales</option>
+                  <option>Marketing</option>
+                  <option>Support</option>
+                  <option>Management</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Position</label>
+                <input type="text" value="Sales Manager" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+            </div>
+            <div class="mt-6">
+              <label class="block text-sm font-medium text-[#111814] mb-1">Bio</label>
+              <textarea class="w-full p-3 border border-[#dce5e0] rounded-lg h-24">Experienced sales professional with 5+ years in lead generation and customer relationship management.</textarea>
+            </div>
+            <div class="mt-6 flex justify-end">
+              <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div x-show="tab === 'settings'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Settings</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">Email Notifications</p>
+                <p class="text-sm text-[#638872]">Receive email notifications for important updates</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">SMS Notifications</p>
+                <p class="text-sm text-[#638872]">Receive SMS notifications for urgent matters</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">Dark Mode</p>
+                <p class="text-sm text-[#638872]">Enable dark mode for the interface</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
             </div>
           </div>
-
-          <!-- Stats Cards -->
-          <div class="grid grid-cols-2 gap-4 mt-6">
-            <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
-              <p class="text-2xl font-bold text-[#111814]">142</p>
-              <p class="text-sm text-[#638872]">Leads</p>
-            </div>
-            <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
-              <p class="text-2xl font-bold text-[#111814]">86</p>
-              <p class="text-sm text-[#638872]">Conversions</p>
-            </div>
+          <div class="mt-6 flex justify-end">
+            <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Settings</button>
           </div>
         </div>
+      </div>
 
-        <!-- Profile Form -->
-        <div class="lg:col-span-2">
-          <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
-            <h3 class="text-xl font-bold mb-4 text-[#111814]">Profile Information</h3>
-            <form>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">First Name</label>
-                  <input type="text" value="John" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Last Name</label>
-                  <input type="text" value="Doe" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Email</label>
-                  <input type="email" value="john.doe@example.com" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Phone</label>
-                  <input type="tel" value="+1 (555) 123-4567" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Department</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>Sales</option>
-                    <option>Marketing</option>
-                    <option>Support</option>
-                    <option>Management</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Position</label>
-                  <input type="text" value="Sales Manager" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
+      <!-- Change Password Tab -->
+      <div x-show="tab === 'password'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Change Password</h3>
+          <form>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Current Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
               </div>
-              <div class="mt-6">
-                <label class="block text-sm font-medium text-[#111814] mb-1">Bio</label>
-                <textarea class="w-full p-3 border border-[#dce5e0] rounded-lg h-24">Experienced sales professional with 5+ years in lead generation and customer relationship management.</textarea>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">New Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
               </div>
-              <div class="mt-6 flex justify-end">
-                <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Changes</button>
-              </div>
-            </form>
-          </div>
-
-          <!-- Settings -->
-          <div class="bg-white rounded-xl border border-[#dce5e0] p-6 mt-6">
-            <h3 class="text-xl font-bold mb-4 text-[#111814]">Settings</h3>
-            <div class="space-y-4">
-              <div class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-[#111814]">Email Notifications</p>
-                  <p class="text-sm text-[#638872]">Receive email notifications for important updates</p>
-                </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" class="sr-only peer" checked>
-                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#19e56e]"></div>
-                </label>
-              </div>
-              <div class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-[#111814]">SMS Notifications</p>
-                  <p class="text-sm text-[#638872]">Receive SMS notifications for urgent matters</p>
-                </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" class="sr-only peer">
-                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#19e56e]"></div>
-                </label>
-              </div>
-              <div class="flex justify-between items-center">
-                <div>
-                  <p class="font-medium text-[#111814]">Dark Mode</p>
-                  <p class="text-sm text-[#638872]">Enable dark mode for the interface</p>
-                </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" class="sr-only peer">
-                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#19e56e]"></div>
-                </label>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Confirm New Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
               </div>
             </div>
             <div class="mt-6 flex justify-end">
-              <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Settings</button>
+              <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Update Password</button>
             </div>
-          </div>
-
-          <!-- Change Password -->
-          <div class="bg-white rounded-xl border border-[#dce5e0] p-6 mt-6">
-            <h3 class="text-xl font-bold mb-4 text-[#111814]">Change Password</h3>
-            <form>
-              <div class="grid grid-cols-1 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Current Password</label>
-                  <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">New Password</label>
-                  <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Confirm New Password</label>
-                  <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-              </div>
-              <div class="mt-6 flex justify-end">
-                <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Update Password</button>
-              </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+
   </main>
 
   <!-- Footer -->

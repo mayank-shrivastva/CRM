@@ -150,15 +150,18 @@
             </div>
 
             <!-- Settings Button -->
-            <button class="p-2 rounded-full hover:bg-gray-100" title="Settings">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                </svg>
-            </button>
+           <a href="setting.html" title="Settings">
+  <button class="p-2 rounded-full hover:bg-gray-100">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+    </svg>
+  </button>
+</a>
+
 
             <!-- Profile Button -->
             <div class="relative">
@@ -283,10 +286,24 @@
     <!-- Main Content -->
     <section class="flex-1 p-6 overflow-y-auto">
       <!-- Header -->
-      <div class="mb-6">
-        <h2 class="text-3xl font-bold text-[#111814]">Lead Dashboard</h2>
-        <p class="text-[#638872] mt-1">Manage and track your sales leads effectively.</p>
-      </div>
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+  <!-- Left Side (Heading + Subheading) -->
+  <div>
+    <h2 class="text-3xl font-bold text-[#111814]">Lead Dashboard</h2>
+    <p class="text-[#638872] mt-1">Manage and track your sales leads effectively.</p>
+  </div>
+
+  <!-- Right Side (Button) -->
+  <div>
+    <button class="bg-[#111814] text-white px-5 py-2 rounded-md hover:bg-[#2a3b2f] transition w-fit">
+      Send Today Work
+    </button>
+  </div>
+</div>
+
+
+
+
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -411,19 +428,39 @@
 
       <!-- Pagination -->
 
-      <div class="mt-12">
-        <h3 class="text-xl font-bold mb-3 text-[#111814]">Upcoming Follow-Ups</h3>
-        <div class="border border-[#dce5e0] rounded-xl p-4 shadow-sm space-y-4">
-          <div class="flex justify-between items-center">
-            <div>
-              <p class="text-[#111814] font-medium">Anjali Mehta</p>
-              <p class="text-sm text-[#638872]">Call on 2025-08-05</p>
-            </div>
-            <button class="text-sm px-3 py-1 bg-[#19e56e] text-white rounded-lg">Mark Done</button>
-          </div>
-          <!-- more follow-ups -->
-        </div>
+     <div class="mt-12">
+  <h3 class="text-xl font-bold mb-3 text-[#111814]">Upcoming Follow-Ups</h3>
+  <div class="border border-[#dce5e0] rounded-xl p-4 shadow-sm space-y-4" id="followUpsList">
+
+    <!-- Follow-up item -->
+    <div class="flex justify-between items-center follow-up-item">
+      <div>
+        <p class="text-[#111814] font-medium">Anjali Mehta</p>
+        <p class="text-sm text-[#638872]">Call on 2025-08-05</p>
       </div>
+      <button
+        class="text-sm px-3 py-1 bg-[#19e56e] text-white rounded-lg"
+        onclick="markFollowUpDone(this)"
+      >
+        Mark Done
+      </button>
+    </div>
+
+    <!-- Add more follow-ups here with the same structure -->
+
+  </div>
+</div>
+
+<script>
+  function markFollowUpDone(button) {
+    const followUpItem = button.closest('.follow-up-item');
+    followUpItem.remove();
+
+    // Optional: Show a toast or message
+    alert('Marked as done!');
+  }
+</script>
+
       
 
 

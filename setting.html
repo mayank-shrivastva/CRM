@@ -92,7 +92,7 @@
 
 <body class="bg-white min-h-screen flex flex-col">
   <!-- Header -->
-  <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+   <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
         <div class="flex items-center gap-4">
             <!-- Sidebar toggle (only mobile) -->
             <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -170,7 +170,7 @@
                 <!-- Profile Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <ul class="text-sm text-gray-700">
+                   <ul class="text-sm text-gray-700">
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="index.html">Logout</a></li>
@@ -209,10 +209,11 @@
             }
         });
     </script>
+
   <!-- Layout -->
   <main class="flex flex-1 overflow-hidden">
     <!-- Sidebar -->
-  <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
+   <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
       <div class="flex items-center gap-3 mb-6">
        
         <span class="text-lg font-semibold">Welcome XYZ</span>
@@ -269,7 +270,7 @@
         
 
         <!-- Profile -->
-        <a href="./profile.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+        <a href="./profile.html"  class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
@@ -279,153 +280,167 @@
     </aside>
 
     <!-- Main Content -->
-    <section class="flex-1 p-6 overflow-y-auto">
-      <div class="mb-6">
-        <h2 class="text-3xl font-bold text-[#111814]">Settings</h2>
-        <p class="text-[#638872] mt-1">Manage your application preferences and configurations.</p>
+    <!-- Include Alpine.js for tab functionality -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<section class="flex-1 p-6 overflow-y-auto" x-data="{ tab: 'profile' }">
+  <div class="mb-6">
+    <h2 class="text-3xl font-bold text-[#111814]">User Profile</h2>
+    <p class="text-[#638872] mt-1">Manage your profile information and settings.</p>
+  </div>
+
+  <!-- Tab Buttons -->
+  <div class="flex space-x-4 border-b border-[#dce5e0] mb-6">
+    <button @click="tab = 'profile'" :class="tab === 'profile' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Profile Info</button>
+    <button @click="tab = 'settings'" :class="tab === 'settings' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Settings</button>
+    <button @click="tab = 'password'" :class="tab === 'password' ? 'border-b-2 border-[#19e56e] text-[#111814]' : 'text-[#638872]'" class="pb-2 text-sm font-semibold">Change Password</button>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Profile Sidebar (always visible) -->
+    <div class="lg:col-span-1">
+      <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+        <div class="flex flex-col items-center">
+          <img src="https://avatar.iran.liara.run/public" alt="User Avatar" class="w-24 h-24 rounded-full border-4 border-[#19e56e]" />
+          <h3 class="text-xl font-bold mt-4 text-[#111814]">John Doe</h3>
+          <p class="text-[#638872]">Sales Manager</p>
+          <p class="text-sm text-[#638872] mt-2">Member since Jan 2023</p>
+          <button class="mt-4 bg-[#19e56e] text-white font-bold px-4 py-2 rounded-lg">Change Photo</button>
+        </div>
       </div>
 
-      <!-- Settings Navigation -->
-      <div class="bg-white rounded-xl border border-[#dce5e0] mb-6">
-        <div class="border-b border-[#dce5e0]">
-          <nav class="flex flex-wrap">
-            <button class="px-6 py-4 font-medium text-[#19e56e] border-b-2 border-[#19e56e]">General</button>
-            <button class="px-6 py-4 font-medium text-[#638872] hover:text-[#111814]">Notifications</button>
-            <button class="px-6 py-4 font-medium text-[#638872] hover:text-[#111814]">Security</button>
-            <button class="px-6 py-4 font-medium text-[#638872] hover:text-[#111814]">Billing</button>
-            <button class="px-6 py-4 font-medium text-[#638872] hover:text-[#111814]">Integrations</button>
-          </nav>
+      <div class="grid grid-cols-2 gap-4 mt-6">
+        <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
+          <p class="text-2xl font-bold text-[#111814]">142</p>
+          <p class="text-sm text-[#638872]">Leads</p>
         </div>
+        <div class="bg-[#f0f4f2] p-4 rounded-xl text-center">
+          <p class="text-2xl font-bold text-[#111814]">86</p>
+          <p class="text-sm text-[#638872]">Conversions</p>
+        </div>
+      </div>
+    </div>
 
-        <!-- Settings Content -->
-        <div class="p-6">
-          <!-- General Settings -->
-          <div>
-            <h3 class="text-xl font-bold mb-4 text-[#111814]">General Settings</h3>
-            
-            <!-- Company Information -->
-            <div class="mb-8">
-              <h4 class="text-lg font-semibold mb-3 text-[#111814]">Company Information</h4>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Company Name</label>
-                  <input type="text" value="LeadFlow CRM" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Website</label>
-                  <input type="url" value="https://leadflow.example.com" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Phone</label>
-                  <input type="tel" value="+1 (555) 123-4567" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Email</label>
-                  <input type="email" value="info@leadflow.example.com" class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                </div>
+    <!-- Right Content Tabs -->
+    <div class="lg:col-span-2">
+      <!-- Profile Info Tab -->
+      <div x-show="tab === 'profile'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Profile Information</h3>
+          <form>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">First Name</label>
+                <input type="text" value="John" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Last Name</label>
+                <input type="text" value="Doe" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Email</label>
+                <input type="email" value="john.doe@example.com" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Phone</label>
+                <input type="tel" value="+1 (555) 123-4567" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Department</label>
+                <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
+                  <option>Sales</option>
+                  <option>Marketing</option>
+                  <option>Support</option>
+                  <option>Management</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Position</label>
+                <input type="text" value="Sales Manager" class="w-full p-3 border border-[#dce5e0] rounded-lg">
               </div>
             </div>
-
-            <!-- Timezone and Language -->
-            <div class="mb-8">
-              <h4 class="text-lg font-semibold mb-3 text-[#111814]">Localization</h4>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Timezone</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>(UTC-12:00) International Date Line West</option>
-                    <option>(UTC-11:00) Midway Island, Samoa</option>
-                    <option selected>(UTC-08:00) Pacific Time (US & Canada)</option>
-                    <option>(UTC-07:00) Mountain Time (US & Canada)</option>
-                    <option>(UTC-06:00) Central Time (US & Canada)</option>
-                    <option>(UTC-05:00) Eastern Time (US & Canada)</option>
-                    <option>(UTC-04:00) Atlantic Time (Canada)</option>
-                    <option>(UTC-03:30) Newfoundland</option>
-                    <option>(UTC-03:00) Buenos Aires, Georgetown</option>
-                    <option>(UTC-02:00) Mid-Atlantic</option>
-                    <option>(UTC-01:00) Azores</option>
-                    <option>(UTC+00:00) London, Dublin, Lisbon</option>
-                    <option>(UTC+01:00) Amsterdam, Berlin, Rome</option>
-                    <option>(UTC+02:00) Athens, Istanbul, Jerusalem</option>
-                    <option>(UTC+03:00) Moscow, St. Petersburg</option>
-                    <option>(UTC+04:00) Abu Dhabi, Muscat</option>
-                    <option>(UTC+05:00) Islamabad, Karachi</option>
-                    <option>(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                    <option>(UTC+06:00) Astana, Dhaka</option>
-                    <option>(UTC+07:00) Bangkok, Hanoi, Jakarta</option>
-                    <option>(UTC+08:00) Beijing, Hong Kong, Singapore</option>
-                    <option>(UTC+09:00) Tokyo, Seoul, Osaka</option>
-                    <option>(UTC+10:00) Brisbane, Sydney, Melbourne</option>
-                    <option>(UTC+11:00) Magadan, Solomon Islands</option>
-                    <option>(UTC+12:00) Auckland, Wellington, Fiji</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Language</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                    <option>German</option>
-                    <option>Japanese</option>
-                    <option>Chinese</option>
-                  </select>
-                </div>
-              </div>
+            <div class="mt-6">
+              <label class="block text-sm font-medium text-[#111814] mb-1">Bio</label>
+              <textarea class="w-full p-3 border border-[#dce5e0] rounded-lg h-24">Experienced sales professional with 5+ years in lead generation and customer relationship management.</textarea>
             </div>
-
-            <!-- Appearance -->
-            <div class="mb-8">
-              <h4 class="text-lg font-semibold mb-3 text-[#111814]">Appearance</h4>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Theme</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>Light</option>
-                    <option>Dark</option>
-                    <option>System</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Color Scheme</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>Default</option>
-                    <option>Blue</option>
-                    <option>Green</option>
-                    <option>Purple</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-[#111814] mb-1">Font Size</label>
-                  <select class="w-full p-3 border border-[#dce5e0] rounded-lg">
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- Save Button -->
-            <div class="flex justify-end">
+            <div class="mt-6 flex justify-end">
               <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Changes</button>
             </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div x-show="tab === 'settings'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Settings</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">Email Notifications</p>
+                <p class="text-sm text-[#638872]">Receive email notifications for important updates</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">SMS Notifications</p>
+                <p class="text-sm text-[#638872]">Receive SMS notifications for urgent matters</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
+            </div>
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-[#111814]">Dark Mode</p>
+                <p class="text-sm text-[#638872]">Enable dark mode for the interface</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#19e56e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
+              </label>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Save Settings</button>
           </div>
         </div>
       </div>
 
-      <!-- Danger Zone -->
-      <div class="bg-white rounded-xl border border-red-200 p-6">
-        <h3 class="text-xl font-bold mb-4 text-red-600">Danger Zone</h3>
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div>
-            <p class="font-medium text-[#111814]">Delete Account</p>
-            <p class="text-sm text-[#638872] mt-1">Once you delete your account, there is no going back. Please be certain.</p>
-          </div>
-          <button class="mt-4 md:mt-0 bg-red-600 text-white font-bold px-6 py-2 rounded-lg">Delete Account</button>
+      <!-- Change Password Tab -->
+      <div x-show="tab === 'password'" x-transition>
+        <div class="bg-white rounded-xl border border-[#dce5e0] p-6">
+          <h3 class="text-xl font-bold mb-4 text-[#111814]">Change Password</h3>
+          <form>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Current Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">New Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-[#111814] mb-1">Confirm New Password</label>
+                <input type="password" class="w-full p-3 border border-[#dce5e0] rounded-lg">
+              </div>
+            </div>
+            <div class="mt-6 flex justify-end">
+              <button class="bg-[#19e56e] text-white font-bold px-6 py-2 rounded-lg">Update Password</button>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
   </main>
 
   <!-- Footer -->

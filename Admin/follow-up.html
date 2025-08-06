@@ -2,97 +2,105 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lead Management Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <style>
-    body {
-      font-family: 'Inter', 'Noto Sans', sans-serif;
-    }
-  </style>
-  <style>
-    /* Mobile First Approach */
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Management Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans', sans-serif;
+        }
+    </style>
+    <style>
+        /* Mobile First Approach */
 
-    /* Adjust table padding and font size for smaller devices */
-    @media (max-width: 640px) {
+        /* Adjust table padding and font size for smaller devices */
+        @media (max-width: 640px) {
 
-      table th,
-      table td {
-        padding: 0.5rem !important;
-        font-size: 0.75rem;
-      }
+            table th,
+            table td {
+                padding: 0.5rem !important;
+                font-size: 0.75rem;
+            }
 
-      input[type="text"],
-      select {
-        width: 100% !important;
-      }
+            input[type="text"],
+            select {
+                width: 100% !important;
+            }
 
-      .stats-grid {
-        grid-template-columns: 1fr !important;
-      }
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
 
-      .filter-buttons {
-        flex-direction: column !important;
-        gap: 0.5rem !important;
-      }
+            .filter-buttons {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
 
-      #sidebar {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        z-index: 50;
-        height: 100%;
-        transition: left 0.3s ease-in-out;
-      }
+            #sidebar {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                z-index: 50;
+                height: 100%;
+                transition: left 0.3s ease-in-out;
+            }
 
-      #sidebar.active {
-        left: 0;
-      }
+            #sidebar.active {
+                left: 0;
+            }
 
-      #sidebarToggle {
-        display: inline-block;
-      }
-    }
+            #sidebarToggle {
+                display: inline-block;
+            }
+        }
 
-    /* Medium devices (tablets, 641px - 768px) */
-    @media (min-width: 641px) and (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
+        /* Medium devices (tablets, 641px - 768px) */
+        @media (min-width: 641px) and (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
 
-    /* Large devices (desktop) */
-    @media (min-width: 1024px) {
-      .stats-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
-      }
-    }
-  </style>
+        /* Large devices (desktop) */
+        @media (min-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+    </style>
 
-  <script src="./sidebar-dropdown.js" defer></script>
-  <script>
-    // sidebar-dropdown.js
-    document.addEventListener('DOMContentLoaded', () => {
-      const sidebarToggle = document.getElementById('sidebarToggle');
-      const sidebar = document.getElementById('sidebar');
+    
+   <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
 
+    if (sidebarToggle) {
       sidebarToggle.addEventListener('click', () => {
         sidebar.classList.toggle('active');
       });
-    });
+    }
+  });
 
-  </script>
+  function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('active');
+    }
+  }
+</script>
+
 </head>
 
 <body class="bg-white min-h-screen flex flex-col">
-  <!-- Header -->
- <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+    <!-- Header -->
+    <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
         <div class="flex items-center gap-4">
             <!-- Sidebar toggle (only mobile) -->
             <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -170,7 +178,7 @@
                 <!-- Profile Dropdown -->
                 <div id="profileDropdown"
                     class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <ul class="text-sm text-gray-700">
+                    <ul class="text-sm text-gray-700">
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
                         <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="../index.html">Logout</a></li>
@@ -180,63 +188,87 @@
         </div>
     </header>
 
-  <script>
-    // Toggle Notification
-    const notificationBtn = document.getElementById('notificationBtn');
-    const notificationDropdown = document.getElementById('notificationDropdown');
+    <script>
+        // Toggle Notification
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
 
-    notificationBtn.addEventListener('click', () => {
-      notificationDropdown.classList.toggle('hidden');
-      profileDropdown.classList.add('hidden'); // Hide profile if open
-    });
+        notificationBtn.addEventListener('click', () => {
+            notificationDropdown.classList.toggle('hidden');
+            profileDropdown.classList.add('hidden'); // Hide profile if open
+        });
 
-    // Toggle Profile
-    const profileBtn = document.getElementById('profileBtn');
-    const profileDropdown = document.getElementById('profileDropdown');
+        // Toggle Profile
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
 
-    profileBtn.addEventListener('click', () => {
-      profileDropdown.classList.toggle('hidden');
-      notificationDropdown.classList.add('hidden'); // Hide notification if open
-    });
+        profileBtn.addEventListener('click', () => {
+            profileDropdown.classList.toggle('hidden');
+            notificationDropdown.classList.add('hidden'); // Hide notification if open
+        });
 
-    // Close dropdowns if clicked outside
-    window.addEventListener('click', function (e) {
-      if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
-        notificationDropdown.classList.add('hidden');
-      }
-      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-        profileDropdown.classList.add('hidden');
-      }
-    });
-  </script>
+        // Close dropdowns if clicked outside
+        window.addEventListener('click', function (e) {
+            if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+                notificationDropdown.classList.add('hidden');
+            }
+            if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
 
-  <!-- Layout -->
-  <main class="flex flex-1 overflow-hidden">
-    <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
-      <div class="flex items-center gap-3 mb-6">
-
+    <!-- Layout -->
+    <main class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
+            <div class="flex items-center gap-3 mb-6">
+                 <button onclick="closeSidebar()" class="absolute top-4 right-4 md:hidden text-gray-500 hover:text-red-600">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+      </svg>
+    </button>
         <span class="text-lg font-semibold">Welcome Admin</span>
       </div>
 
       <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
         <!-- Dashboard -->
-        <a href="./dashboard.html"
-        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
-          
+         <a href="./dashboard.html"
+         class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add/Edit Employee">
+          <!-- Home Icon -->
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0h4" />
           </svg>
           Dashboard
         </a>
+
+        <!-- Add New Lead -->
         <a href="./Add_new.html"
           class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
           aria-label="Add New Lead">
+          <!-- User Plus Icon -->
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
+              d="M18 9a3 3 0 11-6 0 3 3 0 016 0zM13 15h-1a4 4 0 00-4 4v1m6-5h6m-3-3v6" />
           </svg>
           <span class="text-sm font-medium">Add New Lead</span>
+        </a>
+
+        <!-- Add/Edit Employee -->
+        <a href="./Add_new_employee.html"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add/Edit Employee">
+          <!-- Briefcase Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6M12 4V2m0 0H9a2 2 0 00-2 2v2h10V4a2 2 0 00-2-2h-3zM4 7h16v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" />
+          </svg>
+          <span class="text-sm font-medium">Add/Edit Employee</span>
         </a>
 
 

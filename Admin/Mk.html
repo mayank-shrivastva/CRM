@@ -2,545 +2,478 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>John Smith - Lead Details</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead Management Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans', sans-serif;
+    }
+  </style>
+  <style>
+    /* Mobile First Approach */
 
-        .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+    /* Adjust table padding and font size for smaller devices */
+    @media (max-width: 640px) {
 
-        .status-new {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
+      table th,
+      table td {
+        padding: 0.5rem !important;
+        font-size: 0.75rem;
+      }
 
-        .status-contacted {
-            background-color: #fef3c7;
-            color: #92400e;
-        }
+      input[type="text"],
+      select {
+        width: 100% !important;
+      }
 
-        .status-qualified {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+      }
 
-        .status-converted {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
+      .filter-buttons {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+      }
 
-        .status-lost {
-            background-color: #fee2e2;
-            color: #991b1b;
-        }
-    </style>
+      #sidebar {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        z-index: 50;
+        height: 100%;
+        transition: left 0.3s ease-in-out;
+      }
+
+      #sidebar.active {
+        left: 0;
+      }
+
+      #sidebarToggle {
+        display: inline-block;
+      }
+    }
+
+    /* Medium devices (tablets, 641px - 768px) */
+    @media (min-width: 641px) and (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    /* Large devices (desktop) */
+    @media (min-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+    }
+  </style>
+
+  <script src="./sidebar-dropdown.js" defer></script>
+  <script>
+    // sidebar-dropdown.js
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const sidebar = document.getElementById('sidebar');
+
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+    });
+
+  </script>
 </head>
 
-<body class="bg-gray-50 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white px-6 py-4 shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="lead-management.html" class="text-gray-600 hover:text-gray-900">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+<body class="bg-white min-h-screen flex flex-col">
+  <!-- Header -->
+ <header class="bg-white px-6 py-4 flex items-center justify-between shadow-sm border-b border-gray-200 relative">
+        <div class="flex items-center gap-4">
+            <!-- Sidebar toggle (only mobile) -->
+            <button id="sidebarToggle" class="block sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <h1 class="text-xl font-bold text-gray-900">CRM</h1>
+        </div>
+
+        <div class="flex items-center gap-4 relative">
+            <!-- Notifications Button -->
+            <div class="relative">
+                <button id="notificationBtn" class="p-2 rounded-full hover:bg-gray-100" title="Notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
-                </a>
-                <h1 class="text-2xl font-bold text-gray-900">Lead Details</h1>
+                </button>
+
+                <!-- Notifications Dropdown -->
+                <!-- Notifications Dropdown -->
+                <div id="notificationDropdown"
+                    class="hidden absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 z-50">
+                    <div class="px-4 py-3 border-b text-sm font-semibold text-gray-800">
+                        Notifications
+                    </div>
+                    <ul class="divide-y divide-gray-100 max-h-72 overflow-y-auto">
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-yellow-500 text-lg">🔔</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">New task assigned</p>
+                                <p class="text-xs text-gray-400 mt-1">Just now</p>
+                            </div>
+                        </li>
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-indigo-500 text-lg">📅</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">Meeting at 3PM</p>
+                                <p class="text-xs text-gray-400 mt-1">Today</p>
+                            </div>
+                        </li>
+                        <li class="px-4 py-3 flex items-start gap-2 hover:bg-gray-50 cursor-pointer">
+                            <span class="text-green-500 text-lg">✅</span>
+                            <div class="text-sm text-gray-700 leading-tight">
+                                <p class="font-medium">Task "Lead Follow-up" marked complete</p>
+                                <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
+            <!-- Settings Button -->
+            <button class="p-2 rounded-full hover:bg-gray-100" title="Settings">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                </svg>
+            </button>
+
+            <!-- Profile Button -->
+            <div class="relative">
+                <button id="profileBtn" class="focus:outline-none">
+                    <img src="https://avatar.iran.liara.run/public" alt="User Avatar"
+                        class="w-10 h-10 rounded-full border border-gray-300">
+                </button>
+
+                <!-- Profile Dropdown -->
+                <div id="profileDropdown"
+                    class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                  <ul class="text-sm text-gray-700">
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="profile.html">Profile</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="setting.html">Settings</a></li>
+                        <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><a href="../index.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Lead Header -->
-        <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                <!-- Left: Avatar + Info -->
-                <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-                    <img src="https://avatar.iran.liara.run/public/40" alt="John Smith"
-                        class="w-16 h-16 rounded-full mx-auto sm:mx-0">
-                    <div class="text-center sm:text-left">
-                        <h2 class="text-xl font-bold text-gray-900">John Smith</h2>
-                        <p class="text-gray-600">Lead ID: #LS-2024-001</p>
-                        <span
-                            class="inline-block px-3 py-1 mt-2 text-sm bg-green-100 text-green-700 rounded-full">Qualified</span>
-                    </div>
-                </div>
+  <script>
+    // Toggle Notification
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
 
-                <!-- Right: Dates -->
-                <div class="text-center sm:text-right">
-                    <p class="text-sm text-gray-500">Created</p>
-                    <p class="font-semibold">March 15, 2024</p>
-                    <p class="text-sm text-gray-500 mt-1">Last Updated: 2 hours ago</p>
-                </div>
-            </div>
-        </div>
+    notificationBtn.addEventListener('click', () => {
+      notificationDropdown.classList.toggle('hidden');
+      profileDropdown.classList.add('hidden'); // Hide profile if open
+    });
+
+    // Toggle Profile
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileBtn.addEventListener('click', () => {
+      profileDropdown.classList.toggle('hidden');
+      notificationDropdown.classList.add('hidden'); // Hide notification if open
+    });
+
+    // Close dropdowns if clicked outside
+    window.addEventListener('click', function (e) {
+      if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+        notificationDropdown.classList.add('hidden');
+      }
+      if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+        profileDropdown.classList.add('hidden');
+      }
+    });
+  </script>
+
+  <!-- Layout -->
+  <main class="flex flex-1 overflow-hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-white text-gray-900 py-6 px-4 space-y-6 border-r border-gray-200 flex flex-col">
+      <div class="flex items-center gap-3 mb-6">
+       
+        <span class="text-lg font-semibold">Welcome Admin</span>
+      </div>
+
+      <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
+        <!-- Dashboard -->
+         <a href="./dashboard.html"
+         class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add/Edit Employee">
+          <!-- Home Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-4 0h4" />
+          </svg>
+          Dashboard
+        </a>
+
+        <!-- Add New Lead -->
+        <a href="./Add_new.html"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-black transition"
+          aria-label="Add New Lead">
+          <!-- User Plus Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M18 9a3 3 0 11-6 0 3 3 0 016 0zM13 15h-1a4 4 0 00-4 4v1m6-5h6m-3-3v6" />
+          </svg>
+          <span class="text-sm font-medium">Add New Lead</span>
+        </a>
+
+        <!-- Add/Edit Employee -->
+        <a href="./Add_new_employee.html"
+          class="flex items-center gap-3 px-3 py-2 rounded-lg bg-teal-500 text-white font-medium">
+          <!-- Briefcase Icon -->
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6M12 4V2m0 0H9a2 2 0 00-2 2v2h10V4a2 2 0 00-2-2h-3zM4 7h16v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7z" />
+          </svg>
+          <span class="text-sm font-medium">Add/Edit Employee</span>
+        </a>
 
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Column - Contact Info -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Contact Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <p class="text-gray-900">john.smith@example.com</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                            <p class="text-gray-900">+1 (555) 123-4567</p>
-                        </div>
-                       
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                            <p class="text-gray-900">123 Business Ave, Suite 100<br>New York, NY 10001</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Source</label>
-                            <p class="text-gray-900">Website Contact Form</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Requirements</label>
-                            <p class="text-gray-900">Website Contact Form</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Lead Management -->
+        <a href="./lead-management.html"
+          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 8h10M7 12h4m1 8h1a2 2 0 002-2v-4H5v4a2 2 0 002 2z" />
+          </svg>
+          Lead Management
+        </a>
 
-                <!-- Lead Details -->
+        <!-- Call Reports -->
+        <a href="./call-report.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h4" />
+          </svg>
+          Call Reports
+        </a>
+
+        <!-- Follow-Up Alerts -->
+        <a href="./follow-up.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3c0 .217-.035.428-.098.627L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+          Follow-Up Alerts
+        </a>
+
+        <!-- Send Quotation -->
+        <a href="./send-a-quotes.html"
+          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 4v16h16V4H4zm8 4h4M8 12h8m-8 4h4" />
+          </svg>
+          Send Quotation
+        </a>
+
+        <!-- Reports -->
+        <a href="./admin-report.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 17v-2a4 4 0 014-4h4m1 1v2a2 2 0 002 2h2" />
+          </svg>
+          Admin Reports
+        </a>
+
+        <!-- Day-End Summary (Employee) -->
+        <a href="./employe-day-end-sumery.html"
+          class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3" />
+          </svg>
+          Day-End Summary
+        </a>
+
+        <!-- Profile -->
+        <a href="./profile.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          Profile
+        </a>
+      </nav>
+    </aside>
 
 
-                <!-- Calling Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Calling Information</h3>
-                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Log Call</button>
-                    </div>
 
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-blue-500 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Phone Call - Outbound</p>
-                                <span class="text-sm text-gray-500">Today, 2:30 PM</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Discussed requirements for CRM implementation. Client
-                                interested in custom dashboard features.</p>
-                            <p class="text-xs text-gray-500 mt-1">Duration: 25 minutes | Status: Interested</p>
-                        </div>
+    <!-- Main Content -->
+    <section class="flex-1 p-6 overflow-y-auto">
+      <!-- Header -->
+      <div class="mb-6">
+         <h2 class="text-3xl font-bold text-[#111814]">Employee Management</h2>
+        <p class="text-[#638872] mt-1">Add, view, and manage employee details here.</p>
+      </div>
 
-                        <div class="border-l-4 border-green-500 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Phone Call - Inbound</p>
-                                <span class="text-sm text-gray-500">Mar 18, 10:15 AM</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Follow-up call regarding pricing and implementation
-                                timeline</p>
-                            <p class="text-xs text-gray-500 mt-1">Duration: 15 minutes | Status: Requested Quote</p>
-                        </div>
+      <!-- Stats Cards -->
+      <!-- 1. Weekly Leads Overview -->
+      <!-- Chart.js CDN -->
 
-                        <div class="border-l-4 border-gray-400 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Phone Call - Outbound</p>
-                                <span class="text-sm text-gray-500">Mar 16, 3:45 PM</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Initial contact call - left voicemail</p>
-                            <p class="text-xs text-gray-500 mt-1">Duration: 2 minutes | Status: Voicemail</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Updates & Notes -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Updates & Notes</h3>
-                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Add Note</button>
-                    </div>
 
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-purple-500 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Status Updated</p>
-                                <span class="text-sm text-gray-500">2 hours ago</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Lead status changed from "Contacted" to "Qualified"
-                            </p>
-                            <p class="text-xs text-gray-500 mt-1">Updated by: Sarah Johnson</p>
-                        </div>
 
-                        <div class="border-l-4 border-blue-500 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Note Added</p>
-                                <span class="text-sm text-gray-500">Yesterday</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Client mentioned they are evaluating 3 other vendors.
-                                Need to schedule demo ASAP.</p>
-                            <p class="text-xs text-gray-500 mt-1">Added by: Mike Davis</p>
-                        </div>
+      <!-- Leads Table -->
+    <div class="mt-10">
+  <div class="bg-white border border-gray-200 rounded-xl p-6 mb-10 w-full md:w-[40%] mx-auto">
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">➕ Add New Employee</h3>
+  <form class="grid grid-cols-1 gap-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Full Name</label>
+      <input type="text" placeholder="Enter full name" class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Email</label>
+      <input type="email" placeholder="Enter email" class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Phone</label>
+      <input type="text" placeholder="Enter phone" class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Designation</label>
+      <input type="text" placeholder="e.g. Developer, Manager" class="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+    </div>
+    <div>
+      <button type="submit" class="mt-4 px-6 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition">
+        Save Employee
+      </button>
+    </div>
+  </form>
+</div>
 
-                        <div class="border-l-4 border-green-500 pl-4">
-                            <div class="flex items-center justify-between">
-                                <p class="font-medium text-gray-900">Email Sent</p>
-                                <span class="text-sm text-gray-500">Mar 19</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mt-1">Sent follow-up email with case studies and ROI
-                                calculator</p>
-                            <p class="text-xs text-gray-500 mt-1">Sent by: System</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Quotations -->
-              <div class="bg-white rounded-xl shadow-sm p-6">
-  <div class="flex items-center justify-between mb-4">
-    <h3 class="text-lg font-semibold text-gray-900">Quotations</h3>
-    <button onclick="createNewQuote()" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
-      Create New Quote
-    </button>
+
+      <!-- Employee List Table -->
+    <div class="bg-white border border-gray-200 rounded-xl p-6">
+  <h3 class="text-xl font-semibold text-gray-800 mb-4">📋 Employee List</h3>
+
+  <!-- Table View (Desktop) -->
+  <div class="hidden md:block overflow-x-auto">
+    <table class="min-w-full text-left text-sm">
+      <thead class="bg-gray-100 text-gray-700 font-medium">
+        <tr>
+          <th class="py-2 px-4">#</th>
+          <th class="py-2 px-4">Name</th>
+          <th class="py-2 px-4">Email</th>
+          <th class="py-2 px-4">Phone</th>
+          <th class="py-2 px-4">Designation</th>
+          <th class="py-2 px-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y">
+        <tr>
+          <td class="py-2 px-4">1</td>
+          <td class="py-2 px-4">Mayank Kumar</td>
+          <td class="py-2 px-4">mayank@example.com</td>
+          <td class="py-2 px-4">+91 9876543210</td>
+          <td class="py-2 px-4">Developer</td>
+          <td class="py-2 px-4">
+            <button class="text-blue-600 hover:text-blue-800 font-medium mr-3" onclick="openEditModal()">Edit</button>
+            <button class="text-red-600 hover:text-red-800 font-medium">Delete</button>
+          </td>
+        </tr>
+        <!-- Add more rows here -->
+      </tbody>
+    </table>
   </div>
 
-  <div class="space-y-3">
-    <!-- Quote #Q-2024-001 -->
-    <div class="border border-gray-200 rounded-lg p-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="font-medium text-gray-900">Quote #Q-2024-001</p>
-          <p class="text-sm text-gray-600">CRM Enterprise Package</p>
-        </div>
-        <div class="text-right">
-          <p class="font-semibold text-gray-900">$42,500</p>
-          <span class="status-badge status-qualified">Sent</span>
-        </div>
+  <!-- Card View (Mobile) -->
+  <div class="block md:hidden space-y-4">
+    <div class="border rounded-lg p-4 shadow-sm">
+      <div class="mb-2">
+        <span class="block text-sm text-gray-500">#1</span>
+        <h4 class="text-base font-semibold text-gray-800">Mayank Kumar</h4>
       </div>
-      <div class="mt-3 flex gap-2">
-        <button onclick="viewQuoteDetails('Q-2024-001')" class="text-sm text-blue-600 hover:text-blue-700">
-          View Details
-        </button>
-        <button onclick="sendFollowUp('Q-2024-001')" class="text-sm text-green-600 hover:text-green-700">
-          Send Follow-up
-        </button>
+      <p class="text-sm text-gray-600"><strong>Email:</strong> mayank@example.com</p>
+      <p class="text-sm text-gray-600"><strong>Phone:</strong> +91 9876543210</p>
+      <p class="text-sm text-gray-600"><strong>Designation:</strong> Developer</p>
+      <div class="mt-3 flex gap-4">
+        <button class="text-blue-600 hover:text-blue-800 font-medium text-sm" onclick="openEditModal()">Edit</button>
+        <button class="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
       </div>
     </div>
-
-    <!-- Quote #Q-2024-002 -->
-    <div class="border border-gray-200 rounded-lg p-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="font-medium text-gray-900">Quote #Q-2024-002</p>
-          <p class="text-sm text-gray-600">Basic CRM Package</p>
-        </div>
-        <div class="text-right">
-          <p class="font-semibold text-gray-900">$25,000</p>
-          <span class="status-badge status-contacted">Draft</span>
-        </div>
-      </div>
-      <div class="mt-3 flex gap-2">
-        <button onclick="editQuote('Q-2024-002')" class="text-sm text-blue-600 hover:text-blue-700">
-          Edit
-        </button>
-        <button onclick="sendQuote('Q-2024-002')" class="text-sm text-green-600 hover:text-green-700">
-          Send
-        </button>
-      </div>
-    </div>
+    <!-- Repeat card for each employee -->
   </div>
 </div>
 
-            </div>
+    </section>
+  </div>
 
-            <!-- Right Column - Quick Actions & Timeline -->
-            <div class="space-y-6">
-                <!-- Quick Actions -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-                    <div class="space-y-3">
-                        <button onclick="scheduleCall()"
-                            class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                            Schedule Call
-                        </button>
-                        <button onclick="sendEmail()"
-                            class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-                            Send Email
-                        </button>
-                        <button onclick="assignLead()"
-                            class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
-                            Assign Lead
-                        </button>
-                        <button onclick="addNote()"
-                            class="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
-                            Add Note
-                        </button>
-
-                    </div>
-                </div>
-
-                <!-- Activity Timeline -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Activity Timeline</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Call Scheduled</p>
-                                <p class="text-xs text-gray-500">Today, 3:00 PM</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Quote Sent</p>
-                                <p class="text-xs text-gray-500">Yesterday</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Lead Qualified</p>
-                                <p class="text-xs text-gray-500">2 days ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2"></div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Lead Created</p>
-                                <p class="text-xs text-gray-500">Mar 15, 2024</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Assigned Team -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Assigned Team</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3">
-                            <img src="https://avatar.iran.liara.run/public/1" alt="Sarah Johnson"
-                                class="w-8 h-8 rounded-full">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Sarah Johnson</p>
-                                <p class="text-xs text-gray-500">Sales Rep</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img src="https://avatar.iran.liara.run/public/2" alt="Mike Davis"
-                                class="w-8 h-8 rounded-full">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Mike Davis</p>
-                                <p class="text-xs text-gray-500">Account Manager</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Edit Employee Modal -->
+  <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-xl">
+      <h3 class="text-xl font-semibold mb-4">✏️ Edit Employee</h3>
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input type="text" class="mt-1 w-full px-4 py-2 border rounded-md">
         </div>
-    </main>
-
-    <!-- Modal Overlay -->
-    <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center z-50">
-        <!-- Modal Content -->
-        <div id="modalContent" class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h2 id="modalTitle" class="text-xl font-semibold text-gray-800">Modal Title</h2>
-                <button onclick="closeModal()"
-                    class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
-            </div>
-            <div id="modalBody" class="text-gray-700">
-                <!-- Dynamic content will appear here -->
-            </div>
-            <div class="mt-4 text-right">
-                <button onclick="closeModal()"
-                    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Close</button>
-            </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" class="mt-1 w-full px-4 py-2 border rounded-md">
         </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Phone</label>
+          <input type="text" class="mt-1 w-full px-4 py-2 border rounded-md">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Designation</label>
+          <input type="text" class="mt-1 w-full px-4 py-2 border rounded-md">
+        </div>
+        <div class="md:col-span-2 flex justify-end gap-3 mt-4">
+          <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+          <button type="submit" class="px-6 py-2 bg-teal-600 text-white rounded hover:bg-teal-700">Update</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script>
-        function openModal(title, content) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalBody').innerHTML = content;
-            document.getElementById('modalOverlay').classList.remove('hidden');
-            document.getElementById('modalOverlay').classList.add('flex');
-        }
+  <script>
+    function openEditModal() {
+      document.getElementById('editModal').classList.remove('hidden');
+    }
 
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.add('hidden');
-            document.getElementById('modalOverlay').classList.remove('flex');
-        }
-
-        // Actions
-        function scheduleCall() {
-            openModal('Schedule Call', `
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium">Date & Time</label>
-          <input type="datetime-local" class="w-full border-gray-300 rounded mt-1">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Notes</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="3" placeholder="Call agenda..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Schedule</button>
-      </form>
-    `);
-        }
-
-        function sendEmail() {
-            openModal('Send Email', `
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium">To</label>
-          <input type="email" class="w-full border-gray-300 rounded mt-1" value="john.smith@example.com">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Subject</label>
-          <input type="text" class="w-full border-gray-300 rounded mt-1" placeholder="Subject line">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Message</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Type your message..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Send</button>
-      </form>
-    `);
-        }
-
-        function assignLead() {
-            openModal('Assign Lead', `
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium">Select Team Member</label>
-          <select class="w-full border-gray-300 rounded mt-1">
-            <option>Sarah Johnson</option>
-            <option>Mike Davis</option>
-            <option>New Member...</option>
-          </select>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Assign</button>
-      </form>
-    `);
-        }
-
-        function addNote() {
-            openModal('Add Note', `
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium">Note</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Write your note..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800">Add Note</button>
-      </form>
-    `);
-        }
-
-        // Create New Quote
-function createNewQuote() {
-    openModal('Create New Quote', `
-      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote Created!'); closeModal();">
-        <div>
-          <label class="block text-sm font-medium">Quote Title</label>
-          <input type="text" class="w-full border-gray-300 rounded mt-1" placeholder="e.g. CRM Premium Plan">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Amount</label>
-          <input type="number" class="w-full border-gray-300 rounded mt-1" placeholder="e.g. 25000">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Description</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="3" placeholder="Package details..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Create Quote</button>
-      </form>
-    `);
-}
-
-// View Quote Details
-function viewQuoteDetails(quoteId) {
-    openModal('Quote Details', `
-      <div class="space-y-2">
-        <p><strong>Quote ID:</strong> ${quoteId}</p>
-        <p><strong>Title:</strong> CRM Enterprise Package</p>
-        <p><strong>Amount:</strong> $42,500</p>
-        <p><strong>Status:</strong> Sent</p>
-        <p class="text-sm text-gray-600 mt-4">Add more dynamic data here from DB or JSON if needed.</p>
-      </div>
-    `);
-}
-
-// Send Follow-up
-function sendFollowUp(quoteId) {
-    openModal('Send Follow-up', `
-      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Follow-up Sent for ${quoteId}'); closeModal();">
-        <div>
-          <label class="block text-sm font-medium">Message</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Write follow-up message..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Send</button>
-      </form>
-    `);
-}
-
-// Edit Quote
-function editQuote(quoteId) {
-    openModal('Edit Quote', `
-      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote ${quoteId} updated!'); closeModal();">
-        <div>
-          <label class="block text-sm font-medium">Title</label>
-          <input type="text" class="w-full border-gray-300 rounded mt-1" value="Basic CRM Package">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Amount</label>
-          <input type="number" class="w-full border-gray-300 rounded mt-1" value="25000">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Description</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="3">Basic features + limited support</textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">Update</button>
-      </form>
-    `);
-}
-
-// Send Quote
-function sendQuote(quoteId) {
-    openModal('Send Quote', `
-      <form class="space-y-4" onsubmit="event.preventDefault(); alert('Quote ${quoteId} sent!'); closeModal();">
-        <div>
-          <label class="block text-sm font-medium">Email</label>
-          <input type="email" class="w-full border-gray-300 rounded mt-1" placeholder="client@example.com">
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Message</label>
-          <textarea class="w-full border-gray-300 rounded mt-1" rows="4" placeholder="Quote details..."></textarea>
-        </div>
-        <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Send Quote</button>
-      </form>
-    `);
-}
-
-    </script>
+    function closeEditModal() {
+      document.getElementById('editModal').classList.add('hidden');
+    }
+  </script>
 
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-12">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <p class="text-center text-sm text-gray-500"><!--© 2024 LeadFlow CRM. All rights reserved.--></p>
-        </div>
-    </footer>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#f0f4f2] text-center text-[#638872] py-4 text-sm">
+    <!--© 2024 LeadFlow CRM. All rights reserved.-->
+  </footer>
 </body>
 
 </html>
