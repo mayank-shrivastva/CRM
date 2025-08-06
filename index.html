@@ -14,7 +14,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f1f5f9;
+      background-color: #e2e8f0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,13 +22,13 @@
     }
 
     .login-container {
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
       width: 100%;
-      max-width: 400px;
-      animation: fadeIn 0.5s ease;
+      max-width: 380px;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     .login-header {
@@ -37,24 +37,24 @@
     }
 
     .login-header h2 {
-      color: #1e293b;
-      font-size: 24px;
+      color: #1f2937;
+      font-size: 26px;
       font-weight: 600;
     }
 
     .login-header p {
-      color: #64748b;
+      color: #6b7280;
       font-size: 14px;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .form-group label {
       display: block;
-      color: #334155;
+      color: #374151;
       font-size: 14px;
       font-weight: 500;
       margin-bottom: 6px;
@@ -62,19 +62,19 @@
 
     .form-group input {
       width: 100%;
-      padding: 12px;
+      padding: 12px 14px;
       font-size: 15px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      background-color: #f8fafc;
-      transition: all 0.2s ease;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background-color: #f9fafb;
+      transition: 0.2s;
     }
 
     .form-group input:focus {
       outline: none;
       border-color: #3b82f6;
       background-color: #fff;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     }
 
     .login-button {
@@ -83,7 +83,7 @@
       background-color: #3b82f6;
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
@@ -96,7 +96,7 @@
 
     .forgot-password {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 16px;
     }
 
     .forgot-password a {
@@ -113,7 +113,7 @@
       text-align: center;
       color: #dc2626;
       font-size: 14px;
-      margin-top: 10px;
+      margin-top: 12px;
       display: none;
     }
 
@@ -127,13 +127,29 @@
         opacity: 1;
       }
     }
+
+    /* Logo Icon Placeholder */
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 10px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
     <div class="login-header">
+      <div class="logo">CMS</div>
       <h2>Login to CMS</h2>
-      <p>Enter your credentials to access the dashboard</p>
+      <p>Please enter your credentials to continue</p>
     </div>
 
     <form id="loginForm">
@@ -158,27 +174,22 @@
   </div>
 
   <script>
-  const form = document.getElementById('loginForm');
-  const errorBox = document.getElementById('errorMessage');
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('errorMessage');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    errorBox.style.display = 'none'; // Hide error on new attempt
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorBox.style.display = 'none';
 
-    const username = form.username.value.trim();
-    const password = form.password.value.trim();
+      const username = form.username.value.trim();
+      const password = form.password.value.trim();
 
-    if (username === 'admin' && password === 'admin') {
-      window.location.href = "Admin/dashboard.html";
-    } else if (username === 'xyz' && password === 'xyz') {
-      window.location.href = "dashboard.html";
-    } else {
-      errorBox.style.display = 'block'; // Show error if invalid
-    }
-  });
-</script>
-
+      if ((username === 'admin' && password === 'admin') || (username === 'xyz' && password === 'xyz')) {
+        window.location.href = username === 'admin' ? "/Admin/dashboard.html" : "/dashboard.html";
+      } else {
+        errorBox.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
-
-
