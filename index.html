@@ -169,9 +169,9 @@
     const password = form.password.value.trim();
 
     if (username === 'admin' && password === 'admin') {
-      window.location.href = "/Admin/dashboard.html";
+      window.location.href = "cms/Admin/dashboard.html";
     } else if (username === 'xyz' && password === 'xyz') {
-      window.location.href = "/dashboard.html";
+      window.location.href = "cms/dashboard.html";
     } else {
       errorBox.style.display = 'block'; // Show error if invalid
     }
@@ -180,3 +180,4 @@
 
 </body>
 </html>
+
