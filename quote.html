@@ -409,7 +409,7 @@
                         </div>
                         <div id="previewSection"
                             class="hidden mt-8 bg-white rounded-lg shadow p-6 border border-teal-300">
-                            <h2 class="text-lg font-semibold mb-4 text-teal-700">Quotation Preview</h2>
+                            
                             <div id="previewContent" class="space-y-2 text-gray-800"></div>
                         </div>
                     </div>
@@ -452,6 +452,17 @@
             <!-- Preview Section -->
 
          <script>
+  // Calculate Total Price Function
+  function calculateTotal() {
+    let total = 0;
+    document.querySelectorAll("#serviceItems .service-item").forEach((item) => {
+      const qty = parseInt(item.querySelector(".quantity").value || 0);
+      const price = parseFloat(item.querySelector(".price").value || 0);
+      total += qty * price;
+    });
+    return total.toFixed(2);
+  }
+
   // Preview Button Logic
   document.getElementById("previewBtn").addEventListener("click", function () {
     const name = document.getElementById("clientName").value;
@@ -460,21 +471,73 @@
     const company = document.getElementById("clientCompany").value;
     const description = document.getElementById("serviceDescription").value;
 
-    let itemsHTML = "";
-    document.querySelectorAll("#serviceItems .service-item").forEach((item) => {
-      const desc = item.querySelector("input[type='text']").value;
-      const qty = item.querySelector(".quantity").value;
-      const price = item.querySelector(".price").value;
-      itemsHTML += `<div>• ${desc} - Qty: ${qty}, Price: ₹${price}</div>`;
-    });
-
     document.getElementById("previewContent").innerHTML = `
-      <div><strong>Client:</strong> ${name}</div>
-      <div><strong>Email:</strong> ${email}</div>
-      <div><strong>Phone:</strong> ${phone}</div>
-      <div><strong>Company:</strong> ${company}</div>
-      <div><strong>Description:</strong> ${description}</div>
-      <div class="mt-3"><strong>Items:</strong><br>${itemsHTML}</div>
+      <div class="space-y-6">
+
+        <!-- Header -->
+        <div class="text-center border-b pb-4">
+          <h1 class="text-2xl font-bold text-teal-700">Quotation</h1>
+          <p class="text-sm text-gray-500">Generated on ${new Date().toLocaleDateString()}</p>
+        </div>
+
+        <!-- Client Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="font-semibold text-gray-700 mb-2">Client Information</h3>
+            <p><span class="font-medium">Name:</span> ${name}</p>
+            <p><span class="font-medium">Email:</span> ${email}</p>
+            <p><span class="font-medium">Phone:</span> ${phone}</p>
+            <p><span class="font-medium">Company:</span> ${company}</p>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+
+        <!-- Items Table -->
+        <div>
+            <h3 class="font-semibold text-gray-700 mb-2">Project Description</h3>
+            <p class="text-gray-700 bg-gray-50 p-3 rounded border">${description}</p>
+          <h3 class="font-semibold text-gray-700 mb-2">Service Items</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left border border-gray-300">
+              <thead class="bg-teal-100 text-teal-800">
+                <tr>
+                  <th class="px-4 py-2 border">#</th>
+                  <th class="px-4 py-2 border">Description</th>
+                  <th class="px-4 py-2 border text-center">Qty</th>
+                  <th class="px-4 py-2 border text-right">Price (₹)</th>
+                  <th class="px-4 py-2 border text-right">Subtotal (₹)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${
+                  Array.from(document.querySelectorAll("#serviceItems .service-item")).map((item, index) => {
+                    const desc = item.querySelector("input[type='text']").value;
+                    const qty = parseInt(item.querySelector(".quantity").value || 0);
+                    const price = parseFloat(item.querySelector(".price").value || 0);
+                    const subtotal = qty * price;
+                    return `
+                      <tr class="border-b">
+                        <td class="px-4 py-2 border">${index + 1}</td>
+                        <td class="px-4 py-2 border">${desc}</td>
+                        <td class="px-4 py-2 border text-center">${qty}</td>
+                        <td class="px-4 py-2 border text-right">₹${price.toFixed(2)}</td>
+                        <td class="px-4 py-2 border text-right">₹${subtotal.toFixed(2)}</td>
+                      </tr>
+                    `;
+                  }).join("")
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="text-right text-lg font-semibold text-gray-800 border-t pt-4">
+          Total: ₹${calculateTotal()}
+        </div>
+      </div>
     `;
 
     document.getElementById("previewSection").classList.remove("hidden");
@@ -510,7 +573,7 @@
     alert("Draft saved successfully!");
   });
 
-  // Optional: Load Draft on Page Load
+  // Load Draft on Page Load
   window.addEventListener("DOMContentLoaded", () => {
     const savedDraft = localStorage.getItem("quoteDraft");
     if (savedDraft) {
@@ -521,13 +584,12 @@
       document.getElementById("clientCompany").value = data.company || "";
       document.getElementById("serviceDescription").value = data.description || "";
 
-      // Load first service item
       if (data.serviceItems && data.serviceItems.length > 0) {
-        const item = data.serviceItems[0];
+        const firstItem = data.serviceItems[0];
         const itemEl = document.querySelector("#serviceItems .service-item");
-        itemEl.querySelector("input[type='text']").value = item.desc;
-        itemEl.querySelector(".quantity").value = item.qty;
-        itemEl.querySelector(".price").value = item.price;
+        itemEl.querySelector("input[type='text']").value = firstItem.desc;
+        itemEl.querySelector(".quantity").value = firstItem.qty;
+        itemEl.querySelector(".price").value = firstItem.price;
       }
     }
   });
