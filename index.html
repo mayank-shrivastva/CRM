@@ -185,7 +185,7 @@
       const password = form.password.value.trim();
 
       if ((username === 'admin' && password === 'admin') || (username === 'xyz' && password === 'xyz')) {
-        window.location.href = username === 'admin' ? "cms/Admin/dashboard.html" : "cms/dashboard.html";
+        window.location.href = username === 'admin' ? "/Admin/dashboard.html" : "/dashboard.html";
       } else {
         errorBox.style.display = 'block';
       }
@@ -193,4 +193,5 @@
   </script>
 </body>
 </html>
+
 
